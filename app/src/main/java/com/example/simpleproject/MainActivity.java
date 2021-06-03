@@ -2,8 +2,20 @@ package com.example.simpleproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.simpleproject.datastructure.Queue.QueueActivity;
+import com.example.simpleproject.datastructure.Vector.VectorActivity;
+
+import java.io.File;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     TextView textview;
@@ -14,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     TextView textview6;
     TextView textview7;
     TextView textview8;
+    TextView textview9;
+
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {       ///here onCreate is override because it has same parameter
@@ -24,26 +39,106 @@ public class MainActivity extends AppCompatActivity {
         Encapsulation();
         Inheritance();
         Interface();
+         //exception();
+
+        button=findViewById(R.id.button1);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, QueueActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
     }
 
-    private void Interface(){
-        textview8=findViewById(R.id.tvEight);
-        class Sample implements InterfaceExample{
+
+    class testThread extends Thread{
+        public void run(){
+            for(int i=1;i<5;i++){
+                try{Thread.sleep(1000);}  //here sleep for five seconds
+
+                catch(Exception e){
+
+                    System.out.println(e);
+                }
+                System.out.println(i);
+            }
+        }
+    }
+    private void exception() {
+        textview9=findViewById(R.id.tvNine);
+
+        //Runtime Arithmatic exception
+
+        try {
+            int data1 = 50 / 0;
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+
+        //Runtime ArrayIndexOutOfBoundException
+
+
+        try {
+            int array[] = {1, 3, 5, 7};
+
+            textview9.setText(array[9]);            ////arr[9] is not possible because arr
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+
+
+        ///Null Pointer Exception
+
+
+        try {
+            Object obj=null;
+            obj.toString();
+
+        }catch(NullPointerException e)
+        {
+           e.printStackTrace();
+        }
+
+    }
+
+    private void JavaIo() {
+
+        try {
+            File myObj = new File("file.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                //  textview9.setText(data);
+            }
+            myReader.close();
+
+        } catch (Exception e)  ///here Exception parent class we can use IOExcetion
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void Interface() {
+        textview8 = findViewById(R.id.tvEight);
+        class Sample implements InterfaceExample {
             @Override
             public String run() {
                 return "Run Fast";
             }
         }
 
-       Sample sample=new Sample();
+        Sample sample = new Sample();
 
         textview8.setText(sample.run());
 
 
-
-        class abstractSample extends AbstractClassExample{      ///Abstraction
+        class abstractSample extends AbstractClassExample {      ///Abstraction
             @Override
             public String Run() {
                 return "runn";
@@ -51,23 +146,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void Inheritance(){
+    private void Inheritance() {
 
         textview6 = findViewById(R.id.tvSix);
         textview7 = findViewById(R.id.tvSeven);
 
 
-        NewProgrammer newProgrammer=new NewProgrammer();
+        NewProgrammer newProgrammer = new NewProgrammer();
         newProgrammer.advice();
         newProgrammer.code();  //Here NewProgrammer class inherit Programmer class
+
 
         textview6.setText(newProgrammer.advice());
         textview7.setText(newProgrammer.code());
 
 
-
-
     }
+
 
     private void Encapsulation() {
         textview5 = findViewById(R.id.tvFive);
@@ -110,10 +205,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public class NewProgrammer extends Programmer{      ///Inheritance
-        public String advice()
-        {
+    public class NewProgrammer extends Programmer {      ///Inheritance
+        public String advice() {
             return " study more and more code";
         }
     }

@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleProject">
-        <activity android:name=".MainActivity">
+        <activity android:name=".datastructure.Vector.VectorActivity"></activity>
+        <activity android:name=".datastructure.Queue.QueueActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".datastructure.stack.StackActivity" />
+        <activity android:name=".linklist.LinkListActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
